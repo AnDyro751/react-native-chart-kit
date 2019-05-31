@@ -1,6 +1,6 @@
 import React from 'react'
-import { View } from 'react-native'
-import { Svg, Circle, Polygon, Polyline, Path, Rect, G } from 'react-native-svg'
+import {View} from 'react-native'
+import {Svg, Circle, Polygon, Polyline, Path, Rect, G} from 'react-native-svg'
 import AbstractChart from './abstract-chart'
 
 class LineChart extends AbstractChart {
@@ -32,8 +32,8 @@ class LineChart extends AbstractChart {
           paddingRight + (i * (width - paddingRight)) / dataset.data.length
         const cy =
           (height / 4) *
-          3 *
-          (1 - (x - Math.min(...datas)) / this.calcScaler(datas)) +
+            3 *
+            (1 - (x - Math.min(...datas)) / this.calcScaler(datas)) +
           paddingTop
         const onPress = () => {
           if (!onDataPointClick) {
@@ -50,16 +50,16 @@ class LineChart extends AbstractChart {
         output.push(
           <View key={Math.random()}>
             <Circle
-              cx={30}
-              cy={30}
-              r="4"
+              cx={cx}
+              cy={cy}
+              r="3"
               fill={this.getColor(dataset, 0.9)}
               onPress={onPress}
             />
             <Circle
-              cx={30}
-              cy={30}
-              r="12"
+              cx={cx}
+              cy={cy}
+              r="6"
               fill={this.getColor(dataset, 0)}
               onPress={onPress}
             />
@@ -75,7 +75,7 @@ class LineChart extends AbstractChart {
       return this.renderBezierShadow(config)
     }
 
-    const { data, width, height, paddingRight, paddingTop } = config
+    const {data, width, height, paddingRight, paddingTop} = config
     const output = []
     const datas = this.getDatas(data)
     const baseHeight = this.calcBaseHeight(datas, height)
@@ -88,15 +88,15 @@ class LineChart extends AbstractChart {
               .map(
                 (d, i) => {
                   const x = paddingRight + (i * (width - paddingRight)) / dataset.data.length
-                  const y = (baseHeight - this.calcHeight(d, datas, height)) / 4 * 3 + paddingTop
+                  const y = (baseHeight -  this.calcHeight(d, datas, height)) / 4 * 3 + paddingTop
                   return `${x},${y}`
                 }
               )
               .join(' ') +
             ` ${paddingRight +
-            ((width - paddingRight) / dataset.data.length) *
-            (dataset.data.length - 1)},${(height / 4) * 3 +
-            paddingTop} ${paddingRight},${(height / 4) * 3 + paddingTop}`
+              ((width - paddingRight) / dataset.data.length) *
+                (dataset.data.length - 1)},${(height / 4) * 3 +
+              paddingTop} ${paddingRight},${(height / 4) * 3 + paddingTop}`
           }
           fill="url(#fillShadowGradient)"
           strokeWidth={0}
@@ -111,15 +111,15 @@ class LineChart extends AbstractChart {
       return this.renderBezierLine(config)
     }
 
-    const { width, height, paddingRight, paddingTop, data } = config
+    const {width, height, paddingRight, paddingTop, data} = config
     const output = []
     const datas = this.getDatas(data)
     const baseHeight = this.calcBaseHeight(datas, height)
     data.forEach((dataset, index) => {
       const points = dataset.data.map(
         (d, i) => {
-          const x = (i * (width - paddingRight)) / dataset.data.length + paddingRight
-          const y = (baseHeight - this.calcHeight(d, datas, height)) / 4 * 3 + paddingTop
+          const x  = (i * (width - paddingRight)) / dataset.data.length + paddingRight
+          const y = (baseHeight -  this.calcHeight(d, datas, height)) / 4 * 3 + paddingTop
           return `${x},${y}`
         }
       )
@@ -139,7 +139,7 @@ class LineChart extends AbstractChart {
   }
 
   getBezierLinePoints = (dataset, config) => {
-    const { width, height, paddingRight, paddingTop, data } = config
+    const {width, height, paddingRight, paddingTop, data} = config
     if (dataset.data.length === 0) {
       return 'M0,0'
     }
@@ -189,15 +189,15 @@ class LineChart extends AbstractChart {
   }
 
   renderBezierShadow = config => {
-    const { width, height, paddingRight, paddingTop, data } = config
+    const {width, height, paddingRight, paddingTop, data} = config
     const output = []
     data.map((dataset, index) => {
       const d =
         this.getBezierLinePoints(dataset, config) +
         ` L${paddingRight +
-        ((width - paddingRight) / dataset.data.length) *
-        (dataset.data.length - 1)},${(height / 4) * 3 +
-        paddingTop} L${paddingRight},${(height / 4) * 3 + paddingTop} Z`
+          ((width - paddingRight) / dataset.data.length) *
+            (dataset.data.length - 1)},${(height / 4) * 3 +
+          paddingTop} L${paddingRight},${(height / 4) * 3 + paddingTop} Z`
       output.push(
         <Path
           key={index}
@@ -225,8 +225,8 @@ class LineChart extends AbstractChart {
       decorator,
       onDataPointClick
     } = this.props
-    const { labels = [] } = data
-    const { borderRadius = 0 } = style
+    const {labels = []} = data
+    const {borderRadius = 0} = style
     const config = {
       width,
       height
@@ -250,18 +250,18 @@ class LineChart extends AbstractChart {
             <G>
               {withInnerLines
                 ? this.renderHorizontalLines({
-                  ...config,
-                  count: 4,
-                  paddingTop,
-                  paddingRight
-                })
+                    ...config,
+                    count: 4,
+                    paddingTop,
+                    paddingRight
+                  })
                 : withOuterLines
-                  ? this.renderHorizontalLine({
+                ? this.renderHorizontalLine({
                     ...config,
                     paddingTop,
                     paddingRight
                   })
-                  : null}
+                : null}
             </G>
             <G>
               {this.renderHorizontalLabels({
@@ -275,18 +275,18 @@ class LineChart extends AbstractChart {
             <G>
               {withInnerLines
                 ? this.renderVerticalLines({
-                  ...config,
-                  data: data.datasets[0].data,
-                  paddingTop,
-                  paddingRight
-                })
+                    ...config,
+                    data: data.datasets[0].data,
+                    paddingTop,
+                    paddingRight
+                  })
                 : withOuterLines
-                  ? this.renderVerticalLine({
+                ? this.renderVerticalLine({
                     ...config,
                     paddingTop,
                     paddingRight
                   })
-                  : null}
+                : null}
             </G>
             <G>
               {this.renderVerticalLabels({
