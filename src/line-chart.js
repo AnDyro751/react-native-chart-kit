@@ -59,7 +59,7 @@ class LineChart extends AbstractChart {
             <Circle
               cx={cx}
               cy={cy}
-              r="8"
+              r="10"
               fill={this.getColor(dataset, 0)}
               onPress={onPress}
             />
